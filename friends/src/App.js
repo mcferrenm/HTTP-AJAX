@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Container, Row, Col } from "reactstrap";
 
+import FriendsNav from "./components/FriendsNav";
 import FriendsList from "./components/FriendsList";
-import AppWrapper from "./styles/AppWrapper";
+import FriendsInputForm from "./components/FriendsInputForm";
 
 class App extends Component {
   state = {
@@ -21,9 +23,17 @@ class App extends Component {
   }
   render() {
     return (
-      <AppWrapper className="app">
-        <FriendsList friends={this.state.friends} />
-      </AppWrapper>
+      <Container>
+        <FriendsNav />
+        <Row>
+          <Col className="col-auto">
+            <FriendsInputForm />
+          </Col>
+          <Col>
+            <FriendsList friends={this.state.friends} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

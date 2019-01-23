@@ -1,15 +1,24 @@
 import React from "react";
+import {
+  ListGroup,
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText
+} from "reactstrap";
 
 const FriendsList = props => {
   const { friends } = props;
   return (
     <div>
       {friends.map(friend => (
-        <div>
-          <p>{friend.name}</p>
-          <p>{friend.age}</p>
-          <p>{friend.email}</p>
-        </div>
+        <ListGroup flush>
+          <ListGroupItem>
+            <ListGroupItemHeading>{`${friend.name}: ${
+              friend.age
+            }`}</ListGroupItemHeading>
+            <ListGroupItemText>{friend.email}</ListGroupItemText>
+          </ListGroupItem>
+        </ListGroup>
       ))}
     </div>
   );
