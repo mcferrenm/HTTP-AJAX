@@ -1,21 +1,30 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import FriendsList from "./components/FriendsList";
 import AppWrapper from "./styles/AppWrapper";
 
 class App extends Component {
-  state: {
+  state = {
     friends: []
   };
 
   componentDidMount() {
     axios
       .get("http://localhost:5000/friends")
-      .then(res => console.log(res))
+      .then(res =>
+        this.setState({
+          friends: res.data
+        })
+      )
       .catch(err => console.log(err));
   }
   render() {
-    return <AppWrapper className="app">App</AppWrapper>;
+    return (
+      <AppWrapper className="app">
+        <FriendsList friends={this.state.friends} />
+      </AppWrapper>
+    );
   }
 }
 
