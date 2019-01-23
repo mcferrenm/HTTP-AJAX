@@ -19,6 +19,9 @@ const FriendsList = props => {
             }`}</ListGroupItemHeading>
             <ListGroupItemText>{friend.email}</ListGroupItemText>
             <Button onClick={() => props.editFriend(friend.id)}>Edit</Button>
+            <Button onClick={() => props.deleteFriend(friend.id)}>
+              Delete
+            </Button>
           </ListGroupItem>
         </ListGroup>
       ))}

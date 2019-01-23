@@ -12,7 +12,8 @@ class App extends Component {
     name: "",
     age: 0,
     email: "",
-    id: 0
+    id: 0,
+    isUpdating: false
   };
 
   componentDidMount() {
@@ -50,7 +51,8 @@ class App extends Component {
       name: friend.name,
       age: friend.age,
       email: friend.email,
-      id: friend.id
+      id: friend.id,
+      isUpdating: true
     });
   };
 
@@ -72,8 +74,20 @@ class App extends Component {
       name: "",
       age: null,
       email: "",
-      id: null
+      id: null,
+      isUpdating: false
     });
+  };
+
+  deleteFriend = id => {
+    axios
+      .delete(`http://localhost:5000/friends/${id}`)
+      .then(res =>
+        this.setState({
+          friends: res.data
+        })
+      )
+      .catch(err => console.log(err));
   };
 
   render() {
@@ -89,12 +103,14 @@ class App extends Component {
               name={this.state.name}
               age={this.state.age}
               email={this.state.email}
+              isUpdating={this.state.isUpdating}
             />
           </Col>
           <Col>
             <FriendsList
               friends={this.state.friends}
               editFriend={this.editFriend}
+              deleteFriend={this.deleteFriend}
             />
           </Col>
         </Row>
