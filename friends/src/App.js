@@ -21,13 +21,18 @@ class App extends Component {
       )
       .catch(err => console.log(err));
   }
+
+  addFriendToList = () => {
+    console.log(123);
+  };
+
   render() {
     return (
       <Container>
         <FriendsNav />
         <Row>
           <Col className="col-auto">
-            <FriendsInputForm />
+            <FriendsInputForm addFriendToList={this.addFriendToList} />
           </Col>
           <Col>
             <FriendsList friends={this.state.friends} />

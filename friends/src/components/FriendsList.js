@@ -11,7 +11,7 @@ const FriendsList = props => {
   return (
     <div>
       {friends.map(friend => (
-        <ListGroup flush>
+        <ListGroup flush key={friend.id}>
           <ListGroupItem>
             <ListGroupItemHeading>{`${friend.name}: ${
               friend.age
