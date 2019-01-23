@@ -3,7 +3,8 @@ import {
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading,
-  ListGroupItemText
+  ListGroupItemText,
+  Button
 } from "reactstrap";
 
 const FriendsList = props => {
@@ -17,6 +18,7 @@ const FriendsList = props => {
               friend.age
             }`}</ListGroupItemHeading>
             <ListGroupItemText>{friend.email}</ListGroupItemText>
+            <Button onClick={() => props.editFriend(friend.id)}>Edit</Button>
           </ListGroupItem>
         </ListGroup>
       ))}
