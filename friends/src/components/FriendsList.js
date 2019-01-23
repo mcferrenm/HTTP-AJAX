@@ -18,8 +18,10 @@ const FriendsList = props => {
               friend.age
             }`}</ListGroupItemHeading>
             <ListGroupItemText>{friend.email}</ListGroupItemText>
-            <Button onClick={() => props.editFriend(friend.id)}>Edit</Button>
-            <Button onClick={() => props.deleteFriend(friend.id)}>
+            <Button size="sm" onClick={() => props.editFriend(friend.id)}>
+              Edit
+            </Button>{" "}
+            <Button size="sm" onClick={() => props.deleteFriend(friend.id)}>
               Delete
             </Button>
           </ListGroupItem>

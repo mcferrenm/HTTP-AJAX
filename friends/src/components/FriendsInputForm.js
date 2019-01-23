@@ -39,12 +39,14 @@ const FriendsInputForm = props => {
       </FormGroup>
       <FormGroup>
         {!props.isUpdating && (
-          <Button onClick={props.addFriendToList}>Submit</Button>
-        )}
-      </FormGroup>
-      <FormGroup>
+          <Button size="sm" onClick={props.addFriendToList}>
+            Submit
+          </Button>
+        )}{" "}
         {props.isUpdating && (
-          <Button onClick={props.updateFriend}>Update</Button>
+          <Button size="sm" onClick={props.updateFriend}>
+            Update
+          </Button>
         )}
       </FormGroup>
     </Form>
