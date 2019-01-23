@@ -33,13 +33,27 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  updateFriend = (id, friend) => {
+    axios
+      .put(`http://localhost:5000/friends/${id}`, friend)
+      .then(res =>
+        this.setState({
+          friends: res.data
+        })
+      )
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <Container>
         <FriendsNav />
         <Row>
           <Col className="col-auto">
-            <FriendsInputForm addFriendToList={this.addFriendToList} />
+            <FriendsInputForm
+              addFriendToList={this.addFriendToList}
+              updateFriend={this.updateFriend}
+            />
           </Col>
           <Col>
             <FriendsList friends={this.state.friends} />

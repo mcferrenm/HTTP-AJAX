@@ -7,7 +7,8 @@ class FriendsInputForm extends React.Component {
     this.state = {
       name: "",
       age: null,
-      email: ""
+      email: "",
+      id: null
     };
   }
 
@@ -21,29 +22,42 @@ class FriendsInputForm extends React.Component {
     return (
       <Form>
         <FormGroup>
-          <Label for="examplePassword">Name</Label>
+          <Label for="name">Name</Label>
           <Input
             type="text"
             name="name"
+            id="name"
             placeholder="Enter name..."
             onChange={this.handleChange}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="examplePassword">Age</Label>
+          <Label for="age">Age</Label>
           <Input
             type="number"
             name="age"
+            id="age"
             placeholder="Enter age..."
             onChange={this.handleChange}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="exampleEmail">Email</Label>
+          <Label for="email">Email</Label>
           <Input
             type="email"
             name="email"
+            id="email"
             placeholder="Enter email..."
+            onChange={this.handleChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="id">Id</Label>
+          <Input
+            type="number"
+            name="id"
+            id="id"
+            placeholder="Enter id..."
             onChange={this.handleChange}
           />
         </FormGroup>
@@ -57,6 +71,17 @@ class FriendsInputForm extends React.Component {
           }
         >
           Submit
+        </Button>
+        <Button
+          onClick={() =>
+            this.props.updateFriend(this.state.id, {
+              name: this.state.name
+              // age: this.state.age,
+              // email: this.state.email
+            })
+          }
+        >
+          Update
         </Button>
       </Form>
     );
