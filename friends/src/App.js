@@ -22,8 +22,15 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  addFriendToList = () => {
-    console.log(123);
+  addFriendToList = friend => {
+    axios
+      .post("http://localhost:5000/friends", friend)
+      .then(res =>
+        this.setState({
+          friends: res.data
+        })
+      )
+      .catch(err => console.log(err));
   };
 
   render() {

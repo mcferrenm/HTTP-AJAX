@@ -47,7 +47,17 @@ class FriendsInputForm extends React.Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button onClick={this.props.addFriendToList}>Submit</Button>
+        <Button
+          onClick={() =>
+            this.props.addFriendToList({
+              name: this.state.name,
+              age: this.state.age,
+              email: this.state.email
+            })
+          }
+        >
+          Submit
+        </Button>
       </Form>
     );
   }
