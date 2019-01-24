@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
+import { Route } from "react-router-dom";
 
 import FriendsNav from "./components/FriendsNav";
 import FriendsList from "./components/FriendsList";
 import FriendsInputForm from "./components/FriendsInputForm";
 
+import "./App.css";
+
 class App extends Component {
   state = {
     friends: [],
     name: "",
-    age: 0,
+    age: undefined,
     email: "",
     id: 0,
     isUpdating: false
@@ -33,7 +36,12 @@ class App extends Component {
     });
   };
 
-  addFriendToList = friend => {
+  addFriendToList = () => {
+    const friend = {
+      name: this.state.name,
+      age: this.state.age,
+      email: this.state.email
+    };
     axios
       .post("http://localhost:5000/friends", friend)
       .then(res =>
@@ -56,6 +64,16 @@ class App extends Component {
     });
   };
 
+  cancelUpdate = () => {
+    this.setState({
+      name: "",
+      age: null,
+      email: "",
+      id: null,
+      isUpdating: false
+    });
+  };
+
   updateFriend = () => {
     axios
       .put(`http://localhost:5000/friends/${this.state.id}`, {
@@ -72,7 +90,7 @@ class App extends Component {
 
     this.setState({
       name: "",
-      age: null,
+      age: undefined,
       email: "",
       id: null,
       isUpdating: false
@@ -94,9 +112,23 @@ class App extends Component {
     return (
       <Container>
         <FriendsNav />
-        <Row>
-          <Col className="col-auto">
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <FriendsList
+              {...props}
+              friends={this.state.friends}
+              editFriend={this.editFriend}
+              deleteFriend={this.deleteFriend}
+            />
+          )}
+        />
+        <Route
+          path="/edit"
+          render={props => (
             <FriendsInputForm
+              {...props}
               addFriendToList={this.addFriendToList}
               handleChange={this.handleChange}
               updateFriend={this.updateFriend}
@@ -104,16 +136,10 @@ class App extends Component {
               age={this.state.age}
               email={this.state.email}
               isUpdating={this.state.isUpdating}
+              cancelUpdate={this.cancelUpdate}
             />
-          </Col>
-          <Col>
-            <FriendsList
-              friends={this.state.friends}
-              editFriend={this.editFriend}
-              deleteFriend={this.deleteFriend}
-            />
-          </Col>
-        </Row>
+          )}
+        />
       </Container>
     );
   }

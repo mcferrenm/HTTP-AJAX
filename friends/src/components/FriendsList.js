@@ -8,10 +8,9 @@ import {
 } from "reactstrap";
 
 const FriendsList = props => {
-  const { friends } = props;
   return (
     <div>
-      {friends.map(friend => (
+      {props.friends.map(friend => (
         <ListGroup flush key={friend.id}>
           <ListGroupItem>
             <ListGroupItemHeading>{`${friend.name}: ${
