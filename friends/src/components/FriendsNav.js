@@ -6,20 +6,18 @@ const FriendsNav = props => {
   const conditionalTitle = props.isUpdating ? "Update" : "Add";
 
   return (
-    <div>
-      <Nav tabs>
-        <NavItem>
-          <NavLinkWrapper>
-            <NavLink to="/">Friends List</NavLink>
-          </NavLinkWrapper>
-        </NavItem>
-        <NavItem>
-          <NavLinkWrapper>
-            <NavLink to="/edit">{`${conditionalTitle} Friend`}</NavLink>
-          </NavLinkWrapper>
-        </NavItem>
-      </Nav>
-    </div>
+    <Nav tabs>
+      <NavItem>
+        <NavLinkWrapper>
+          <NavLink to="/">Friends List</NavLink>
+        </NavLinkWrapper>
+      </NavItem>
+      <NavItem>
+        <NavLinkWrapper>
+          <NavLink to="/edit">{`${conditionalTitle} Friend`}</NavLink>
+        </NavLinkWrapper>
+      </NavItem>
+    </Nav>
   );
 };
 

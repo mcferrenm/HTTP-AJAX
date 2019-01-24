@@ -49,9 +49,14 @@ const FriendsInputForm = props => {
               </Button>
             </>
           ) : (
-            <Button size="sm" onClick={props.addFriendToList}>
-              Submit
-            </Button>
+            <>
+              <Button size="sm" onClick={props.addFriendToList}>
+                Submit
+              </Button>{" "}
+              <Button size="sm" onClick={props.cancelUpdate}>
+                Cancel
+              </Button>
+            </>
           )}
         </FormGroup>
       </Form>
