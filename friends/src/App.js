@@ -10,14 +10,17 @@ import FriendsInputForm from "./components/FriendsInputForm";
 import "./App.css";
 
 class App extends Component {
-  state = {
-    friends: [],
-    name: "",
-    age: undefined,
-    email: "",
-    id: 0,
-    isUpdating: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      friends: [],
+      name: "",
+      age: undefined,
+      email: "",
+      id: 0,
+      isUpdating: false
+    };
+  }
 
   componentDidMount() {
     axios
@@ -50,6 +53,7 @@ class App extends Component {
         })
       )
       .catch(err => console.log(err));
+    this.props.history.push("/");
   };
 
   editFriend = id => {
