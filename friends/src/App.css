@@ -1,3 +1,7 @@
-.container .navbar {
-  margin-bottom: 10px;
+.container .nav {
+  margin-bottom: 30px;
+}
+
+.container form {
+  width: 300px;
 }

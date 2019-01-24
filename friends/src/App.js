@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Container } from "reactstrap";
+import { Container, Col } from "reactstrap";
 import { Route } from "react-router-dom";
 
 import FriendsNav from "./components/FriendsNav";
@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       friends: [],
       name: "",
-      age: undefined,
+      age: "",
       email: "",
       id: 0,
       isUpdating: false
@@ -66,16 +66,20 @@ class App extends Component {
       id: friend.id,
       isUpdating: true
     });
+
+    this.props.history.push("/edit");
   };
 
   cancelUpdate = () => {
     this.setState({
       name: "",
-      age: null,
+      age: "",
       email: "",
       id: null,
       isUpdating: false
     });
+
+    this.props.history.push("/");
   };
 
   updateFriend = () => {
@@ -87,18 +91,17 @@ class App extends Component {
       })
       .then(res =>
         this.setState({
-          friends: res.data
+          friends: res.data,
+          name: "",
+          age: "",
+          email: "",
+          id: null,
+          isUpdating: false
         })
       )
       .catch(err => console.log(err));
 
-    this.setState({
-      name: "",
-      age: undefined,
-      email: "",
-      id: null,
-      isUpdating: false
-    });
+    this.props.history.push("/");
   };
 
   deleteFriend = id => {
@@ -115,35 +118,37 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <FriendsNav />
-        <Route
-          exact
-          path="/"
-          render={props => (
-            <FriendsList
-              {...props}
-              friends={this.state.friends}
-              editFriend={this.editFriend}
-              deleteFriend={this.deleteFriend}
-            />
-          )}
-        />
-        <Route
-          path="/edit"
-          render={props => (
-            <FriendsInputForm
-              {...props}
-              addFriendToList={this.addFriendToList}
-              handleChange={this.handleChange}
-              updateFriend={this.updateFriend}
-              name={this.state.name}
-              age={this.state.age}
-              email={this.state.email}
-              isUpdating={this.state.isUpdating}
-              cancelUpdate={this.cancelUpdate}
-            />
-          )}
-        />
+        <FriendsNav isUpdating={this.state.isUpdating} />
+        <Col sm="12" md={{ size: 9, offset: 1 }}>
+          <Route
+            exact
+            path="/"
+            render={props => (
+              <FriendsList
+                {...props}
+                friends={this.state.friends}
+                editFriend={this.editFriend}
+                deleteFriend={this.deleteFriend}
+              />
+            )}
+          />
+          <Route
+            path="/edit"
+            render={props => (
+              <FriendsInputForm
+                {...props}
+                addFriendToList={this.addFriendToList}
+                handleChange={this.handleChange}
+                updateFriend={this.updateFriend}
+                name={this.state.name}
+                age={this.state.age}
+                email={this.state.email}
+                isUpdating={this.state.isUpdating}
+                cancelUpdate={this.cancelUpdate}
+              />
+            )}
+          />
+        </Col>
       </Container>
     );
   }

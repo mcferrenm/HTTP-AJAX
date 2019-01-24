@@ -2,7 +2,9 @@ import React from "react";
 import { Nav, NavItem, NavLink as NavLinkWrapper } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
-const FriendsNav = () => {
+const FriendsNav = props => {
+  const conditionalTitle = props.isUpdating ? "Update" : "Add";
+
   return (
     <div>
       <Nav tabs>
@@ -13,7 +15,7 @@ const FriendsNav = () => {
         </NavItem>
         <NavItem>
           <NavLinkWrapper>
-            <NavLink to="/edit">Add Friend</NavLink>
+            <NavLink to="/edit">{`${conditionalTitle} Friend`}</NavLink>
           </NavLinkWrapper>
         </NavItem>
       </Nav>
